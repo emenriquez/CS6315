@@ -1,0 +1,8 @@
+{
+  "python.pythonPath": "/Users/Erik/.local/share/virtualenvs/fixers-5_viOJdx/bin/python",
+  "team.showWelcomeMessage": false,
+  "editor.formatOnSave": true,
+  "python.linting.pep8Enabled": true,
+  "python.linting.pylintPath": "/path/to/pylint",
+  "python.linting.pylintArgs": ["--load-plugins", "pylint_django"]
+}
