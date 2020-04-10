@@ -1,17 +1,15 @@
 {% load static %}
 
 <nav class="indigo lighten-1">
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo"><b class="large material-icons">healing</b>   WeFixYallStuff.com</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a>About</a></li>
-        <li><a>Become a PRO</a></li>
-        <li><a>Give us Money $$$</a></li>
-      </ul>
-    </div>
-  </nav>
-
-
+	<div class="nav-wrapper">
+		<a href="#" class="brand-logo"><b class="large material-icons">healing</b>   WeFixYallStuff.com</a>
+		<ul id="nav-mobile" class="right hide-on-med-and-down">
+			<li><a>About</a></li>
+			<li><a>Become a PRO</a></li>
+			<li><a>Give us Money $$$</a></li>
+		</ul>
+	</div>
+</nav>
 <html>
 	<head>
 		<!--Import Google Icon Font-->
@@ -22,12 +20,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	</head>
 	<body>
- {% block content %}
-
- <p>Replace this</p>
-
- {% endblock %}
-			<!--JavaScript at end of body for optimized loading-->
-			<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js' %}"></script>
-		</body>
-	</html>
+		{% block content %}
+			<p>Replace this</p>
+		{% endblock %}
+		<!--JavaScript at end of body for optimized loading-->
+		<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js' %}"></script>
+	</body>
+</html>

@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # extensions
+    'django_extensions',
+    'multiselectfield',
+
     # My apps
     'contractors',
 ]
