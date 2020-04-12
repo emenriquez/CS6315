@@ -1,6 +1,7 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import "antd/dist/antd.css";
-import ContractorList from "./containers/ContractorList";
+import BaseRouter from "./routes";
 //import reactDOM from "react-dom";
 
 import CustomLayout from "./containers/layout";
@@ -8,9 +9,11 @@ import CustomLayout from "./containers/layout";
 function App() {
   return (
     <div>
-      <CustomLayout>
-        <ContractorList />
-      </CustomLayout>
+      <Router>
+        <CustomLayout>
+          <BaseRouter />
+        </CustomLayout>
+      </Router>
     </div>
   );
 }
