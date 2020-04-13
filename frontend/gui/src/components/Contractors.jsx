@@ -42,7 +42,11 @@ const Contractors = (props) => {
         >
           <List.Item.Meta
             avatar={<Avatar src="https://picsum.photos/200" />}
-            title={<a href={item.id}>{[item.firstName, " ", item.lastName]}</a>}
+            title={
+              <a href={"search/" + item.id}>
+                {[item.firstName, " ", item.lastName]}
+              </a>
+            }
             description="Coming Soon"
           />
           {item.skill.map((data) => {

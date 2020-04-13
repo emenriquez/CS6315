@@ -31,7 +31,7 @@ class Navbar extends Component {
             twoToneColor="#eb2f96"
             style={{ fontSize: "28px" }}
           />
-          <a href="" style={{ fontWeight: "bold" }}>
+          <a href="/" style={{ fontWeight: "bold" }}>
             Fixers
           </a>
         </div>
