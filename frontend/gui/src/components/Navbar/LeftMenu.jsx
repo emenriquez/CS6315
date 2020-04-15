@@ -18,7 +18,7 @@ class LeftMenu extends Component {
           </MenuItemGroup>
         </SubMenu>
         <Menu.Item key="alipay">
-          <a href="#">Contact Us</a>
+          <a href="/">Contact Us</a>
         </Menu.Item>
       </Menu>
     );

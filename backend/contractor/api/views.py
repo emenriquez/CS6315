@@ -7,6 +7,7 @@ from .serializers import ContractorSerializer, SkillSerializer, CitySerializer
 class ContractorListView(ListAPIView):
     queryset = Contractor.objects.all()
     serializer_class = ContractorSerializer
+    filterset_fields = ['skill', 'city']
 
 
 class ContractorDetailView(RetrieveAPIView):

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import queryString from "query-string";
 
 import Contractors from "../components/Contractors";
 
@@ -9,7 +10,9 @@ class ContractorList extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://127.0.0.1:8000/contractors").then((res) => {
+    const query = this.props.location.search;
+
+    axios.get(`http://127.0.0.1:8000/contractors${query}`).then((res) => {
       this.setState({ contractors: res.data });
     });
   }

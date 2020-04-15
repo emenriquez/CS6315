@@ -6,10 +6,10 @@ class RightMenu extends Component {
     return (
       <Menu mode={this.props.mode}>
         <Menu.Item key="mail">
-          <a href="#">Sign in</a>
+          <a href="/">Sign in</a>
         </Menu.Item>
         <Menu.Item key="app">
-          <a href="#">Register</a>
+          <a href="/">Register</a>
         </Menu.Item>
       </Menu>
     );

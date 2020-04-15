@@ -43,7 +43,7 @@ const Contractors = (props) => {
           <List.Item.Meta
             avatar={<Avatar src="https://picsum.photos/200" />}
             title={
-              <a href={"search/" + item.id}>
+              <a href={"contractors/" + item.id}>
                 {[item.firstName, " ", item.lastName]}
               </a>
             }

@@ -1,21 +1,25 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import Contractors from "../components/Contractors";
+import Homesearch from "../components/Homesearch";
 
-class ContractorList extends Component {
+class HomeOptions extends Component {
   state = {
-    contractors: [],
+    skills: [],
+    cities: [],
   };
 
   componentDidMount() {
-    axios.get("http://127.0.0.1:8000/contractors").then((res) => {
-      this.setState({ contractors: res.data });
+    axios.get("http://127.0.0.1:8000/skills").then((res) => {
+      this.setState({ skills: res.data });
+    });
+    axios.get("http://127.0.0.1:8000/cities").then((res) => {
+      this.setState({ cities: res.data });
     });
   }
   render() {
-    return <Contractors data={this.state.contractors} />;
+    return <Homesearch data={this.state} />;
   }
 }
 
-export default ContractorList;
+export default HomeOptions;

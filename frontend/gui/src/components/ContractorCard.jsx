@@ -28,7 +28,7 @@ const ContractorDetail = (props) => {
       <Meta
         avatar={<Avatar src="https://picsum.photos/200" />}
         title={
-          <a href="">{[props.data.firstName, " ", props.data.lastName]}</a>
+          <a href="/">{[props.data.firstName, " ", props.data.lastName]}</a>
         }
         description={[props.data.skill].map((data) => {
           return `\u00A0\u00A0\u00A0\u00A0 ${data} `;
