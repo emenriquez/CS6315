@@ -28,7 +28,7 @@ const Homesearch = (props) => {
       >
         Housekeeper
       </Button>
-      <p>City Selector</p>
+      <Button>City Selector (Coming soon!)</Button>
     </div>
   );
 };

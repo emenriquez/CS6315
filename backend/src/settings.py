@@ -37,17 +37,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # Extensions
-    'rest_framework',
     'corsheaders',
     'django_filters',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth.registration',
+    'rest_auth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 
     #My Apps
     'contractor'
 ]
 
+SITE_ID = 1
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,7 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'src.urls'
@@ -139,3 +149,10 @@ REST_FRAMEWORK = {
 
 # Cors_headers permissions
 CORS_ORIGIN_ALLOW_ALL = True
+
+# Django auth settings
+ACCOUNT_AUTHENTICATION_METHOD = "username"
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+# Custom Registration

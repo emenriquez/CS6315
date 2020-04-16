@@ -4,6 +4,8 @@ import { Route } from "react-router-dom";
 import ContractorList from "./containers/ContractorList";
 import ContractorDetail from "./containers/ContractorDetail";
 import Homepage from "./containers/Homepage";
+import Login from "./containers/Login";
+import Register from "./containers/Register";
 
 const BaseRouter = () => (
   <div>
@@ -14,6 +16,8 @@ const BaseRouter = () => (
       path="/contractors/:contractorID"
       component={ContractorDetail}
     />
+    <Route exact path="/login/" component={Login} />
+    <Route exact path="/register/" component={Register} />
   </div>
 );
 
