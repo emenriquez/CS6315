@@ -3,36 +3,10 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import * as actions from "../store/actions/auth";
 
-import {
-  Form,
-  Input,
-  Tooltip,
-  Cascader,
-  Row,
-  Col,
-  Checkbox,
-  Button,
-} from "antd";
+import { Form, Input, Tooltip, Select, Checkbox, Button } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 
-const residences = [
-  {
-    value: "Edinburg",
-    label: "Edinburg",
-  },
-  {
-    value: "McAllen",
-    label: "McAllen",
-  },
-  {
-    value: "Pharr",
-    label: "Pharr",
-  },
-  {
-    value: "Brownsville",
-    label: "Brownsville",
-  },
-];
+const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {
@@ -61,9 +35,20 @@ class RegistrationForm extends Component {
   render() {
     const onFinish = (values) => {
       console.log("Received values of form: ", values);
-      this.props.onAuth(values.username, values.email, values.password);
+      this.props.onAuth(
+        values.first_name,
+        values.last_name,
+        values.username,
+        values.email,
+        values.password1,
+        values.password2,
+        values.city
+      );
       this.props.history.push("/");
     };
+    function handleChange(value) {
+      console.log(`selected ${value}`);
+    }
 
     return (
       <Form
@@ -71,13 +56,13 @@ class RegistrationForm extends Component {
         name="register"
         onFinish={onFinish}
         initialValues={{
-          residence: ["Edinburg"],
-          prefix: "86",
+          city: "Edinburg",
         }}
         scrollToFirstError
+        style={{ maxWidth: "500px", margin: "auto" }}
       >
         <Form.Item
-          name="First name"
+          name="first_name"
           label={<span>First Name&nbsp;</span>}
           rules={[
             {
@@ -90,7 +75,7 @@ class RegistrationForm extends Component {
           <Input />
         </Form.Item>
         <Form.Item
-          name="Last name"
+          name="last_name"
           label={<span>Last Name&nbsp;</span>}
           rules={[
             {
@@ -140,7 +125,7 @@ class RegistrationForm extends Component {
         </Form.Item>
 
         <Form.Item
-          name="password"
+          name="password1"
           label="Password"
           rules={[
             {
@@ -154,9 +139,9 @@ class RegistrationForm extends Component {
         </Form.Item>
 
         <Form.Item
-          name="confirm"
+          name="password2"
           label="Confirm Password"
-          dependencies={["password"]}
+          dependencies={["password1"]}
           hasFeedback
           rules={[
             {
@@ -164,8 +149,8 @@ class RegistrationForm extends Component {
               message: "Please confirm your password!",
             },
             ({ getFieldValue }) => ({
-              validator(rule, value) {
-                if (!value || getFieldValue("password") === value) {
+              validator(_, value) {
+                if (!value || getFieldValue("password1") === value) {
                   return Promise.resolve();
                 }
                 return Promise.reject(
@@ -179,59 +164,25 @@ class RegistrationForm extends Component {
         </Form.Item>
 
         <Form.Item
-          name="residence"
-          label="City"
+          name="city"
+          label="city"
           rules={[
             {
-              type: "array",
               required: true,
               message: "Please select your City!",
             },
           ]}
         >
-          <Cascader options={residences} />
-        </Form.Item>
+          <Select
+            defaultValue="Edinburg"
+            style={{ width: 120 }}
+            onChange={handleChange}
+          >
+            <Option value="Edinburg">Edinburg</Option>
+            <Option value="McAllen">McAllen</Option>
 
-        <Form.Item
-          name="phone"
-          label="Phone Number"
-          rules={[
-            { required: true, message: "Please input your phone number!" },
-          ]}
-        >
-          <Input style={{ width: "100%" }} />
-        </Form.Item>
-
-        <Form.Item
-          label="Captcha"
-          extra="Please type 'human' to make sure that your are a human."
-        >
-          <Row gutter={8}>
-            <Col span={12}>
-              <Form.Item
-                name="captcha"
-                noStyle
-                rules={[
-                  {
-                    required: true,
-                    message: "Please type 'human' in the verification field!",
-                  },
-                  () => ({
-                    validator(rule, value) {
-                      if (!value || "human" === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(
-                        "Please type 'human' in the verification field!"
-                      );
-                    },
-                  }),
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-          </Row>
+            <Option value="Pharr">Pharr</Option>
+          </Select>
         </Form.Item>
 
         <Form.Item
@@ -274,8 +225,26 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuth: (username, email, password) =>
-      dispatch(actions.authRegister(username, email, password, password)),
+    onAuth: (
+      first_name,
+      last_name,
+      username,
+      email,
+      password1,
+      password2,
+      city
+    ) =>
+      dispatch(
+        actions.authRegister(
+          first_name,
+          last_name,
+          username,
+          email,
+          password1,
+          password2,
+          city
+        )
+      ),
   };
 };
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import * as actions from "../store/actions/auth";
@@ -9,7 +9,7 @@ class NormalLoginForm extends Component {
   render() {
     let onFinish = (values) => {
       console.log("Received values of form: ", values);
-      this.props.onAuth(values.username, values.password);
+      this.props.onAuth(values.email, values.password);
       this.props.history.push("/");
     };
 
@@ -24,17 +24,21 @@ class NormalLoginForm extends Component {
           onFinish={onFinish}
         >
           <Form.Item
-            name="username"
+            name="email"
             rules={[
               {
+                type: "email",
+                message: "The input is not valid E-mail!",
+              },
+              {
                 required: true,
-                message: "Please input your Username!",
+                message: "Please input your E-mail!",
               },
             ]}
           >
             <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Username"
+              prefix={<MailOutlined className="site-form-item-icon" />}
+              placeholder="Email"
             />
           </Form.Item>
           <Form.Item
@@ -86,8 +90,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuth: (username, password) =>
-      dispatch(actions.authLogin(username, password)),
+    onAuth: (email, password) => dispatch(actions.authLogin(email, password)),
   };
 };
 

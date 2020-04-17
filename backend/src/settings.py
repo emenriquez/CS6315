@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     #My Apps
-    'contractor'
+    'contractor',
+    'userAccount',
 ]
 
 SITE_ID = 1
@@ -85,6 +86,8 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = 'userAccount.Account'
 
 WSGI_APPLICATION = 'src.wsgi.application'
 
@@ -151,8 +154,15 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Django auth settings
-ACCOUNT_AUTHENTICATION_METHOD = "username"
-ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_USERNAME_REQUIRED = False
 
 # Custom Registration
+REST_AUTH_SERIALIZERS = {
+    "USER_DETAILS_SERIALIZER": "userAccount.serializers.CustomUserDetailsSerializer",
+}
+REST_AUTH_REGISTER_SERIALIZERS = {
+    "REGISTER_SERIALIZER": "userAccount.serializers.CustomRegisterSerializer",
+}
