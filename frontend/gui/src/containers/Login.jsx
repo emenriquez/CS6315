@@ -8,7 +8,6 @@ import * as actions from "../store/actions/auth";
 class NormalLoginForm extends Component {
   render() {
     let onFinish = (values) => {
-      console.log("Received values of form: ", values);
       this.props.onAuth(values.email, values.password);
       this.props.history.push("/");
     };

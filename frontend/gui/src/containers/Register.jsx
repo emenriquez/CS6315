@@ -34,7 +34,6 @@ const tailFormItemLayout = {
 class RegistrationForm extends Component {
   render() {
     const onFinish = (values) => {
-      console.log("Received values of form: ", values);
       this.props.onAuth(
         values.first_name,
         values.last_name,
