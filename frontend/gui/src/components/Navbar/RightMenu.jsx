@@ -11,7 +11,7 @@ class RightMenu extends Component {
         {this.props.isAuthenticated ? (
           <Menu mode={this.props.mode}>
             <Menu.Item key="My account">
-              <a href="/">My Account</a>
+              <a href="/account">My Account</a>
             </Menu.Item>
             <Menu.Item key="logout">
               <a onClick={this.props.logout}>Logout</a>

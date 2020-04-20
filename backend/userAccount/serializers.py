@@ -1,6 +1,8 @@
 # Registration
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
+from userAccount.models import Account
+
 class CustomRegisterSerializer(RegisterSerializer):
 
     email = serializers.EmailField(required=True)
@@ -27,6 +29,6 @@ class CustomRegisterSerializer(RegisterSerializer):
 class CustomUserDetailsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = 'Account'
-        fields = ('email','username', 'first_name','last_name', 'city')
-        read_only_fields = ('email',)
+        model = Account
+        fields = ('id', 'email','username', 'first_name','last_name', 'city', 'is_contractor')
+        read_only_fields = ('email','username')

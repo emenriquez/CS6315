@@ -6,6 +6,7 @@ import ContractorDetail from "./containers/ContractorDetail";
 import Homepage from "./containers/Homepage";
 import Login from "./containers/Login";
 import Register from "./containers/Register";
+import MyAccount from "./containers/MyAccount";
 
 const BaseRouter = () => (
   <div>
@@ -18,6 +19,7 @@ const BaseRouter = () => (
     />
     <Route exact path="/login/" component={Login} />
     <Route exact path="/register/" component={Register} />
+    <Route exact path="/account" component={MyAccount} />
   </div>
 );
 
