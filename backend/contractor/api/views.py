@@ -1,9 +1,9 @@
+from rest_framework.permissions import AllowAny
 from rest_framework.generics import (
     ListAPIView,
     RetrieveAPIView,
     CreateAPIView,
-    DestroyAPIView,
-    UpdateAPIView,
+    RetrieveUpdateDestroyAPIView
   )
 
 from contractor.models import (
@@ -17,6 +17,8 @@ from .serializers import (
     SkillSerializer,
     CitySerializer
     )
+
+
 
 class ContractorListView(ListAPIView):
     queryset = Contractor.objects.all()
@@ -38,11 +40,9 @@ class CityListView(ListAPIView):
 class ContractorCreateView(CreateAPIView):
     queryset = Contractor.objects.all()
     serializer_class = ContractorSerializer
+    permission_classes = [AllowAny]
 
-class ContractorUpdateView(UpdateAPIView):
+class ContractorRUDView(RetrieveUpdateDestroyAPIView):
     queryset = Contractor.objects.all()
     serializer_class = ContractorSerializer
-
-class ContractorDeleteView(DestroyAPIView):
-    queryset = Contractor.objects.all()
-    serializer_class = ContractorSerializer
+    permission_classes = [AllowAny]

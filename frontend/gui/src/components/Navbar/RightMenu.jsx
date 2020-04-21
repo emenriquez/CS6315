@@ -14,7 +14,9 @@ class RightMenu extends Component {
               <a href="/account">My Account</a>
             </Menu.Item>
             <Menu.Item key="logout">
-              <a onClick={this.props.logout}>Logout</a>
+              <a onClick={this.props.logout} href="/">
+                Logout
+              </a>
             </Menu.Item>
           </Menu>
         ) : (

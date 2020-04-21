@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "antd";
 
-const Homesearch = (props) => {
+const Homesearch = () => {
   return (
     <div>
       <Button

@@ -39,7 +39,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
     first_name = models.CharField(verbose_name="First Name", max_length=60)
     last_name = models.CharField(verbose_name="Last Name", max_length=60)
-    city = models.CharField(max_length=30)
+    city = models.CharField(max_length=30, verbose_name="My City")
     date_joined = models.DateTimeField(verbose_name="Date Joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="Last Login", auto_now=True)
     is_contractor = models.BooleanField(default=False)

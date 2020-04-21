@@ -25,6 +25,12 @@ class CustomRegisterSerializer(RegisterSerializer):
             'last_name': self.validated_data.get('last_name', ''),
             'city': self.validated_data.get('city', ''),
         }
+    
+    def save(self, request):
+        user = super().save(request)
+        user.city = self.data.get('city')
+        user.save()
+        return user
 
 class CustomUserDetailsSerializer(serializers.ModelSerializer):
 

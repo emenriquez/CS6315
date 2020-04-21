@@ -34,6 +34,7 @@ const tailFormItemLayout = {
 class RegistrationForm extends Component {
   render() {
     const onFinish = (values) => {
+      console.log(values);
       this.props.onAuth(
         values.first_name,
         values.last_name,
@@ -164,7 +165,7 @@ class RegistrationForm extends Component {
 
         <Form.Item
           name="city"
-          label="city"
+          label="City"
           rules={[
             {
               required: true,
@@ -172,11 +173,7 @@ class RegistrationForm extends Component {
             },
           ]}
         >
-          <Select
-            defaultValue="Edinburg"
-            style={{ width: 120 }}
-            onChange={handleChange}
-          >
+          <Select style={{ width: 120 }} onChange={handleChange}>
             <Option value="Edinburg">Edinburg</Option>
             <Option value="McAllen">McAllen</Option>
 

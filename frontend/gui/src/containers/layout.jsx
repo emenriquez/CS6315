@@ -11,7 +11,7 @@ class CustomLayout extends Component {
     return (
       <Layout className="layout" style={{ background: "#fff" }}>
         <Navbar {...this.props} />
-        <Content style={{ padding: 50, minHeight: 280 }}>
+        <Content style={{ padding: 50, minHeight: 650 }}>
           {this.props.children}
         </Content>
         <Divider />

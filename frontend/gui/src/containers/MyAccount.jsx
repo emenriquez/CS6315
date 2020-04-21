@@ -9,19 +9,21 @@ class MyAccount extends Component {
   };
 
   componentDidUpdate() {
-    if (this.props.token) {
-      const options = {
-        headers: {
-          Authorization: `Token ${this.props.token}`,
-        },
-      };
-      axios
-        .get(`http://127.0.0.1:8000/rest-auth/user/`, options)
-        .then((res) => {
-          this.setState({ user: res.data });
-        });
-    } else {
-      console.log("user not loaded");
+    if (!this.state.user.username) {
+      if (this.props.token) {
+        const options = {
+          headers: {
+            Authorization: `Token ${this.props.token}`,
+          },
+        };
+        axios
+          .get(`http://127.0.0.1:8000/rest-auth/user/`, options)
+          .then((res) => {
+            this.setState({ user: res.data });
+          });
+      } else {
+        console.log("user not loaded");
+      }
     }
   }
 

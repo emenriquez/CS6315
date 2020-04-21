@@ -11,6 +11,10 @@ const IconText = ({ icon, text }) => (
 );
 
 const Contractors = (props) => {
+  function getRandomInt() {
+    return Math.floor(Math.random() * 100) + 1;
+  }
+
   return (
     <List
       itemLayout="vertical"
@@ -36,12 +40,16 @@ const Contractors = (props) => {
             <img
               width={272}
               alt="logo"
-              src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+              src={`https://picsum.photos/seed/${getRandomInt()}/400/300?random=1`}
             />
           }
         >
           <List.Item.Meta
-            avatar={<Avatar src="https://picsum.photos/200" />}
+            avatar={
+              <Avatar
+                src={`https://randomuser.me/api/portraits/men/${getRandomInt()}.jpg`}
+              />
+            }
             title={
               <a href={"contractors/" + item.id}>
                 {[item.firstName, " ", item.lastName]}
