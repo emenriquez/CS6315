@@ -8,7 +8,7 @@ class Contractor(models.Model):
     id = models.OneToOneField('userAccount.Account', on_delete=models.DO_NOTHING, primary_key=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    company_name = models.CharField(max_length=50, default=None)
+    company_name = models.CharField(max_length=50, default=None, null=True)
     skill = models.ManyToManyField('Skill')
     city = models.ManyToManyField('City', verbose_name="Available Cities")
 

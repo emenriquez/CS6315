@@ -134,7 +134,10 @@ class ContractorRegistration extends Component {
               bordered
             >
               <Descriptions.Item label="Fixer Display Name">
-                {this.state.contractor.company_name}
+                {this.state.contractor.company_name ||
+                  this.state.contractor.first_name +
+                    " " +
+                    this.state.contractor.last_name}
               </Descriptions.Item>
               <Descriptions.Item label="Skills">
                 {this.state.contractor.skill.map((data) => {

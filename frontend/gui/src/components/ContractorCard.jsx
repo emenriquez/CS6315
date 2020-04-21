@@ -1,34 +1,44 @@
 import React from "react";
 
 import { Card, Avatar } from "antd";
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { MedicineBoxFilled } from "@ant-design/icons";
 
 const { Meta } = Card;
 
 const ContractorDetail = (props) => {
+  function getRandomInt() {
+    return Math.floor(Math.random() * 100) + 1;
+  }
+
   return (
     <Card
       style={{ width: 300 }}
       cover={
         <img
           alt="example"
-          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+          src={`https://picsum.photos/seed/${getRandomInt()}/400/300?random=1`}
         />
       }
       actions={[
-        <SettingOutlined key="setting" />,
-        <EditOutlined key="edit" />,
-        <EllipsisOutlined key="ellipsis" />,
+        <div>
+          <span>Hire Me Now! </span>
+          <MedicineBoxFilled style={{ fontSize: 18 }} key="request" />
+        </div>,
       ]}
     >
       <Meta
-        avatar={<Avatar src="https://picsum.photos/200" />}
+        avatar={
+          <Avatar
+            size={64}
+            src={`https://randomuser.me/api/portraits/men/${getRandomInt()}.jpg`}
+          />
+        }
         title={
-          <a href="/">{[props.data.firstName, " ", props.data.lastName]}</a>
+          props.data.company_name || [
+            props.data.first_Name,
+            " ",
+            props.data.last_ame,
+          ]
         }
         description={[props.data.skill].map((data) => {
           return `\u00A0\u00A0\u00A0\u00A0 ${data} `;
