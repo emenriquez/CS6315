@@ -1,28 +1,53 @@
 import React, { Component } from "react";
 import { Menu } from "antd";
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
+import { connect } from "react-redux";
 
 class LeftMenu extends Component {
   render() {
     return (
-      <Menu mode={this.props.mode}>
-        <SubMenu title={<span>Dropdown</span>}>
-          <MenuItemGroup title="Item 1">
-            <Menu.Item key="setting:1">Option 1</Menu.Item>
-            <Menu.Item key="setting:2">Option 2</Menu.Item>
-          </MenuItemGroup>
-          <MenuItemGroup title="Item 2">
-            <Menu.Item key="setting:3">Option 3</Menu.Item>
-            <Menu.Item key="setting:4">Option 4</Menu.Item>
-          </MenuItemGroup>
-        </SubMenu>
-        <Menu.Item key="alipay">
-          <a href="/">Contact Us</a>
-        </Menu.Item>
-      </Menu>
+      <div>
+        {this.props.isAuthenticated ? (
+          <Menu mode={this.props.mode}>
+            <Menu.Item key="docs">
+              <a
+                href="/"
+                onClick={() =>
+                  window.open("https://github.com/emenriquez/CS6315", "_blank")
+                }
+              >
+                Documentation
+              </a>
+            </Menu.Item>
+            <Menu.Item key="contractor">
+              <a href="/fixer">Become a Fixer!</a>
+            </Menu.Item>
+          </Menu>
+        ) : (
+          <Menu mode={this.props.mode}>
+            <Menu.Item key="docs">
+              <a
+                href="/"
+                onClick={() =>
+                  window.open("https://github.com/emenriquez/CS6315", "_blank")
+                }
+              >
+                Documentation
+              </a>
+            </Menu.Item>
+            <Menu.Item key="contractor">
+              <a href="/login">Become a Fixer!</a>
+            </Menu.Item>
+          </Menu>
+        )}
+      </div>
     );
   }
 }
 
-export default LeftMenu;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.token !== null,
+  };
+};
+
+export default connect(mapStateToProps)(LeftMenu);

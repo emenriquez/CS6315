@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "antd";
 
-const Homesearch = (props) => {
+const Homesearch = () => {
   return (
     <div>
       <Button
@@ -28,7 +28,7 @@ const Homesearch = (props) => {
       >
         Housekeeper
       </Button>
-      <p>City Selector</p>
+      <Button>City Selector (Coming soon!)</Button>
     </div>
   );
 };

@@ -18,4 +18,4 @@ class ContractorSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Contractor
-        fields = ('id', 'firstName', 'lastName', 'skill', 'city')
+        fields = ('id', 'first_name', 'last_name', 'company_name', 'skill', 'city')

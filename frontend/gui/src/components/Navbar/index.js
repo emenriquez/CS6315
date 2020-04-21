@@ -3,12 +3,15 @@ import LeftMenu from "./LeftMenu";
 import RightMenu from "./RightMenu";
 import { Drawer, Button } from "antd";
 import "./Navbar.css";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/auth";
 
 import { MedicineBoxTwoTone } from "@ant-design/icons";
 
 class Navbar extends Component {
   state = {
     visible: false,
+    isAuthenticated: this.props.isAuthenticated,
   };
 
   showDrawer = () => {
@@ -55,8 +58,8 @@ class Navbar extends Component {
             onClose={this.onClose}
             visible={this.state.visible}
           >
-            <LeftMenu mode="inline" />
-            <RightMenu mode="inline" />
+            <LeftMenu mode="inline" {...this.props} />
+            <RightMenu mode="inline" {...this.props} />
           </Drawer>
         </div>
       </nav>
@@ -64,4 +67,17 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.loading,
+    error: state.error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(actions.logout()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
