@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     #My Apps
     'contractor',
     'userAccount',
+    'job',
 ]
 
 SITE_ID = 1

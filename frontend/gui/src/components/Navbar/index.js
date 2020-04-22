@@ -32,9 +32,12 @@ class Navbar extends Component {
         <div className="menu__logo">
           <MedicineBoxTwoTone
             twoToneColor="#eb2f96"
-            style={{ fontSize: "28px" }}
+            style={{ fontSize: "20px" }}
           />
-          <a href="/" style={{ fontWeight: "bold" }}>
+          <a
+            href="/"
+            style={{ fontSize: "20px", font: "Noto Sans", fontWeight: "bold" }}
+          >
             Fixers
           </a>
         </div>
