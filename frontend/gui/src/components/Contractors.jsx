@@ -48,7 +48,7 @@ const Contractors = (props) => {
           <List.Item
             key={(item.first_name, item.last_name)}
             actions={[
-              props.isAuthenticated ? (
+              props.token ? (
                 <IconText
                   icon={StarOutlined}
                   text="Request Me"
@@ -84,7 +84,12 @@ const Contractors = (props) => {
                   {item.company_name || item.first_name + " " + item.last_name}
                 </a>
               }
-              description="Coming Soon"
+              description={
+                "Available in:" +
+                item.city.map((data) => {
+                  return `\u00A0 ${data} `;
+                })
+              }
             />
             {item.skill.map((data) => {
               return `\u00A0\u00A0\u00A0\u00A0 ${data} `;

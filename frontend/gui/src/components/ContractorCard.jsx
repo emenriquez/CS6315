@@ -12,11 +12,11 @@ const ContractorDetail = (props) => {
 
   return (
     <Card
-      style={{ width: 300 }}
+      style={{ maxWidth: 600 }}
       cover={
         <img
           alt="example"
-          src={`https://picsum.photos/seed/${getRandomInt()}/400/300?random=1`}
+          src={`https://picsum.photos/seed/${getRandomInt()}/800/600?random=1`}
         />
       }
       actions={[
