@@ -99,6 +99,7 @@ export const authCheckState = () => {
     const token = localStorage.getItem("token");
     if (token === undefined) {
       dispatch(logout());
+      window.location.href = "/";
     } else {
       const expirationDate = new Date(localStorage.getItem("expirationDate"));
       if (expirationDate <= new Date()) {
@@ -112,5 +113,32 @@ export const authCheckState = () => {
         );
       }
     }
+  };
+};
+
+// Job related functions
+export const getUserID = () => {
+  return (dispatch) => {
+    const token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    };
+    axios
+      .get(`http://127.0.0.1:8000/rest-auth/user/`, options)
+      .then((res) => {
+        dispatch(idSuccess(res.data.id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const idSuccess = (userID) => {
+  return {
+    type: actionTypes.ID_SUCCESS,
+    userID: userID,
   };
 };

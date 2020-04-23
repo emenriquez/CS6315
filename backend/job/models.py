@@ -9,6 +9,7 @@ class Job(models.Model):
     dateRequested = models.DateTimeField(verbose_name="Date Joined", auto_now_add=True)
     contractorAccepted = models.BooleanField(default=False)
     clientConfirmed = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
     complete = models.BooleanField(default=False)
 
     def __str__(self):

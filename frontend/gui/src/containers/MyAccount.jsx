@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { Descriptions, Badge } from "antd";
+import { Descriptions, Badge, Divider } from "antd";
 import { connect } from "react-redux";
 import axios from "axios";
+import * as actions from "../store/actions/auth";
+import JobTable from "../components/JobTable";
 
 class MyAccount extends Component {
   state = {
     user: [],
+    jobs: [],
   };
 
   componentDidUpdate() {
@@ -24,35 +27,51 @@ class MyAccount extends Component {
       } else {
         console.log("user not loaded");
       }
+      this.props.getUserID();
+      const userID = localStorage.getItem("userID");
+      axios
+        .get(`http://127.0.0.1:8000/jobs/?clientID=${userID}`)
+        .then((res) => {
+          this.setState({ jobs: res.data });
+          console.log(this.state);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
 
   render() {
     return (
-      <Descriptions
-        title={`Hello, ${this.state.user.first_name}!`}
-        layout="vertical"
-        bordered
-      >
-        <Descriptions.Item label="First Name">
-          {this.state.user.first_name}
-        </Descriptions.Item>
-        <Descriptions.Item label="Last Name">
-          {this.state.user.last_name}
-        </Descriptions.Item>
-        <Descriptions.Item label="Username">
-          {this.state.user.username}
-        </Descriptions.Item>
-        <Descriptions.Item label="Email Address">
-          {this.state.user.email}
-        </Descriptions.Item>
-        <Descriptions.Item label="City">
-          {this.state.user.city}
-        </Descriptions.Item>
-        <Descriptions.Item label="Status">
-          <Badge status="processing" text="Awesome" />
-        </Descriptions.Item>
-      </Descriptions>
+      <div>
+        <Descriptions
+          title={`Hello, ${this.state.user.first_name}!`}
+          layout="vertical"
+          bordered
+        >
+          <Descriptions.Item label="First Name">
+            {this.state.user.first_name}
+          </Descriptions.Item>
+          <Descriptions.Item label="Last Name">
+            {this.state.user.last_name}
+          </Descriptions.Item>
+          <Descriptions.Item label="Username">
+            {this.state.user.username}
+          </Descriptions.Item>
+          <Descriptions.Item label="Email Address">
+            {this.state.user.email}
+          </Descriptions.Item>
+          <Descriptions.Item label="City">
+            {this.state.user.city}
+          </Descriptions.Item>
+          <Descriptions.Item label="Status">
+            <Badge status="processing" text="Awesome" />
+          </Descriptions.Item>
+        </Descriptions>
+        <Divider />
+        <h1>My Current Jobs</h1>
+        <JobTable jobs={this.state.jobs} />
+      </div>
     );
   }
 }
@@ -64,4 +83,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(MyAccount);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUserID: () => dispatch(actions.getUserID()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyAccount);
