@@ -39,6 +39,7 @@ const authLogout = (state, action) => {
 const idSuccess = (state, action) => {
   return updateObject(state, {
     userID: action.userID,
+    username: action.username,
   });
 };
 

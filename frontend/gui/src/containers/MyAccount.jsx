@@ -23,21 +23,20 @@ class MyAccount extends Component {
           .get(`http://127.0.0.1:8000/rest-auth/user/`, options)
           .then((res) => {
             this.setState({ user: res.data });
+            this.props.getUserID();
+            const username = this.state.user.username;
+            axios
+              .get(`http://127.0.0.1:8000/jobs/?clientID=${username}`)
+              .then((res) => {
+                this.setState({ jobs: res.data });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           });
       } else {
         console.log("user not loaded");
       }
-      this.props.getUserID();
-      const userID = localStorage.getItem("userID");
-      axios
-        .get(`http://127.0.0.1:8000/jobs/?clientID=${userID}`)
-        .then((res) => {
-          this.setState({ jobs: res.data });
-          console.log(this.state);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     }
   }
 
@@ -69,7 +68,7 @@ class MyAccount extends Component {
           </Descriptions.Item>
         </Descriptions>
         <Divider />
-        <h1>My Current Jobs</h1>
+        <h1>My Job Requests</h1>
         <JobTable jobs={this.state.jobs} />
       </div>
     );
@@ -80,6 +79,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.token,
     error: state.error,
+    username: state.username,
   };
 };
 

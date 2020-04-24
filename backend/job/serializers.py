@@ -7,4 +7,3 @@ class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
         fields = '__all__'
-        filterset_fields = ['clientID', 'contractorID', 'dateRequested', 'contractorAccepted', 'clientConfirmed', 'active', 'complete']

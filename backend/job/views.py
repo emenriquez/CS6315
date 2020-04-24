@@ -8,4 +8,5 @@ class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
     permission_classes = [AllowAny]
+    filterset_fields = ['clientID', 'contractorID', 'dateRequested', 'contractorAccepted', 'clientConfirmed', 'active', 'complete']
     ordering = ['dateRequested']

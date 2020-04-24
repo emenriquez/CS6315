@@ -22,8 +22,10 @@ export const authFail = (error) => {
 };
 
 export const logout = () => {
-  localStorage.removeItem("user");
+  localStorage.removeItem("username");
+  localStorage.removeItem("userID");
   localStorage.removeItem("expirationDate");
+  localStorage.removeItem("token");
   return {
     type: actionTypes.AUTH_LOGOUT,
   };
@@ -128,7 +130,7 @@ export const getUserID = () => {
     axios
       .get(`http://127.0.0.1:8000/rest-auth/user/`, options)
       .then((res) => {
-        dispatch(idSuccess(res.data.id));
+        dispatch(idSuccess(res.data.id, res.data.username));
       })
       .catch((err) => {
         console.log(err);
@@ -136,9 +138,10 @@ export const getUserID = () => {
   };
 };
 
-export const idSuccess = (userID) => {
+export const idSuccess = (userID, username) => {
   return {
     type: actionTypes.ID_SUCCESS,
     userID: userID,
+    username: username,
   };
 };
