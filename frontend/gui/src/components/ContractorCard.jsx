@@ -20,7 +20,7 @@ const ContractorDetail = (props) => {
           src={`https://picsum.photos/seed/${getRandomInt()}/800/600?random=1`}
         />
       }
-      actions={[<RequestJob contractor={props.data.id} />]}
+      actions={[<RequestJob contractor={props.data} />]}
     >
       <Meta
         avatar={

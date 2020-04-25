@@ -8,6 +8,8 @@ import Login from "./containers/Login";
 import Register from "./containers/Register";
 import MyAccount from "./containers/MyAccount";
 import ContractorRegistration from "./components/ContractorRegistration";
+import ClientMessages from "./components/ClientMessages";
+import ContractorMessages from "./components/ContractorMessages";
 
 const BaseRouter = () => (
   <div>
@@ -22,6 +24,8 @@ const BaseRouter = () => (
     <Route exact path="/register/" component={Register} />
     <Route exact path="/account" component={MyAccount} />
     <Route exact path="/fixer" component={ContractorRegistration} />
+    <Route exact path="/messages" component={ClientMessages} />
+    <Route exact path="/fixermessages" component={ContractorMessages} />
   </div>
 );
 

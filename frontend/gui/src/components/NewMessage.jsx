@@ -3,17 +3,13 @@ import { Drawer, Form, Button, Input } from "antd";
 
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { connect } from "react-redux";
-import * as actions from "../store/actions/auth";
 
-class RequestJob extends Component {
+class NewMessage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       visible: false,
     };
-    this.props.authCheckState();
-    this.props.getUserID();
   }
 
   showDrawer = () => {
@@ -23,26 +19,17 @@ class RequestJob extends Component {
   };
 
   onFinish = (values) => {
+    const prefix = this.props.sender;
     axios
-      .post(`http://127.0.0.1:8000/jobs/`, {
-        status: "requested",
-        clientID: this.props.username,
-        contractorID: this.props.contractor.id,
-        clientNotes: values.description,
+      .post(`http://127.0.0.1:8000/clientmsg/`, {
+        jobID: this.props.jobID,
+        clientID: this.props.clientID,
+        contractorID: this.props.contractorID,
+        messageText: prefix + values.description,
       })
-      .then((res) => {
-        console.log("Successfully created job!");
-        axios
-          .post(`http://127.0.0.1:8000/clientmsg/`, {
-            jobID: res.data.id,
-            clientID: this.props.username,
-            contractorID: this.props.contractor.id,
-            messageText: "A new job has been requested!",
-          })
-          .then(() => {
-            console.log("Yeah!!");
-            window.location.reload();
-          });
+      .then(() => {
+        console.log("Yeah!!");
+        window.location.reload();
       });
     this.setState({
       visible: false,
@@ -61,15 +48,13 @@ class RequestJob extends Component {
         <Button
           type="primary"
           onClick={() => {
-            this.props.username
-              ? this.showDrawer()
-              : (window.location.href = "/login");
+            this.showDrawer();
           }}
         >
-          <PlusOutlined /> Hire Me Now!
+          <PlusOutlined /> New Message
         </Button>
         <Drawer
-          title="Request this fixer"
+          title="New Message"
           width={350}
           onClose={this.onClose}
           visible={this.state.visible}
@@ -85,21 +70,21 @@ class RequestJob extends Component {
           <Form onFinish={this.onFinish} layout="vertical" hideRequiredMark>
             <Form.Item
               name="description"
-              label="Description"
+              label="Message"
               rules={[
                 {
                   required: true,
-                  message: "please enter a brief description of your request",
+                  message: "please enter a message",
                 },
                 {
                   max: 1000,
-                  message: "please shorten your description",
+                  message: "please shorten your message",
                 },
               ]}
             >
               <Input.TextArea
                 autoSize={{ minRows: 6, maxRows: 10 }}
-                placeholder="please enter a brief description of your request (max 1,000 characters)"
+                placeholder="please enter a brief message (max 1,000 characters)"
               />
             </Form.Item>
             <Button onClick={this.onClose} style={{ marginRight: 8 }}>
@@ -115,18 +100,4 @@ class RequestJob extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    username: state.username,
-    userID: state.userID,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    authCheckState: () => dispatch(actions.authCheckState()),
-    getUserID: () => dispatch(actions.getUserID()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RequestJob);
+export default NewMessage;

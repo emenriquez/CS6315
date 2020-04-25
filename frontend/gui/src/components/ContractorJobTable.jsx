@@ -1,4 +1,4 @@
-import { Table, Tag, Modal } from "antd";
+import { Table, Tag, Modal, Button } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import React, { Component } from "react";
 import axios from "axios";
@@ -157,6 +157,24 @@ class ContractorJobTable extends Component {
                 </Tag>
               );
           }
+        },
+      },
+      {
+        title: "Message",
+        dataIndex: "id",
+        key: "message",
+        render: (jobID) => {
+          return (
+            <Button
+              type="primary"
+              size="small"
+              onClick={() =>
+                (window.location.href = `/fixermessages/?jobID=${jobID}`)
+              }
+            >
+              Messages
+            </Button>
+          );
         },
       },
     ],

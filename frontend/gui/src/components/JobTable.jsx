@@ -1,4 +1,4 @@
-import { Table, Tag } from "antd";
+import { Table, Tag, Button } from "antd";
 import React, { Component } from "react";
 import axios from "axios";
 
@@ -94,6 +94,24 @@ class JobTable extends Component {
                 </Tag>
               );
           }
+        },
+      },
+      {
+        title: "Messages",
+        dataIndex: "id",
+        key: "messages",
+        render: (jobID) => {
+          return (
+            <Button
+              type="primary"
+              size="small"
+              onClick={() =>
+                (window.location.href = `/messages/?jobID=${jobID}`)
+              }
+            >
+              Messages
+            </Button>
+          );
         },
       },
     ],
