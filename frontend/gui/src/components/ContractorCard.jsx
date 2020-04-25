@@ -1,13 +1,14 @@
 import React from "react";
 
 import { Card, Avatar } from "antd";
-import { MedicineBoxFilled } from "@ant-design/icons";
+
+import RequestJob from "./requestJob";
 
 const { Meta } = Card;
 
 const ContractorDetail = (props) => {
   function getRandomInt() {
-    return Math.floor(Math.random() * 100) + 1;
+    return Math.floor(Math.random() * 99) + 1;
   }
 
   return (
@@ -19,12 +20,7 @@ const ContractorDetail = (props) => {
           src={`https://picsum.photos/seed/${getRandomInt()}/800/600?random=1`}
         />
       }
-      actions={[
-        <div>
-          <span>Hire Me Now! </span>
-          <MedicineBoxFilled style={{ fontSize: 18 }} key="request" />
-        </div>,
-      ]}
+      actions={[<RequestJob contractor={props.data.id} />]}
     >
       <Meta
         avatar={
@@ -35,14 +31,18 @@ const ContractorDetail = (props) => {
         }
         title={
           props.data.company_name || [
-            props.data.first_Name,
+            props.data.first_name,
             " ",
-            props.data.last_ame,
+            props.data.last_name,
           ]
         }
-        description={[props.data.skill].map((data) => {
-          return `\u00A0\u00A0\u00A0\u00A0 ${data} `;
-        })}
+        description={
+          props.data.skill
+            ? props.data.skill.map((data) => {
+                return `\u00A0\u00A0 ${data} `;
+              })
+            : null
+        }
       />
     </Card>
   );

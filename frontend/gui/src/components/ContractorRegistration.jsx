@@ -61,7 +61,6 @@ class ContractorRegistration extends Component {
               )
               .then((res) => {
                 this.setState({ jobs: res.data });
-                console.log(res.data);
               })
               .catch((err) => {
                 console.log(err);
@@ -223,6 +222,9 @@ class ContractorRegistration extends Component {
                   <Option value="Electrician">Electrician</Option>
                   <Option value="Plumber">Plumber</Option>
                   <Option value="Housekeeper">Housekeeper</Option>
+                  <Option value="Landscaper">Landscaper</Option>
+                  <Option value="General">General / Misc.</Option>
+                  <Option value="Builder">Builder</Option>
                 </Select>
               </Form.Item>
 

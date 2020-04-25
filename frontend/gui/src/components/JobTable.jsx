@@ -15,14 +15,14 @@ class JobTable extends Component {
         dataIndex: "contractorID",
         key: "contractorID",
         render: (dude) => {
-          if (dude in this.state) {
-            return this.state[dude];
+          if (`contractor${dude}` in this.state) {
+            return this.state["contractor" + dude];
           } else {
             axios
               .get(`http://127.0.0.1:8000/contractors/${dude}`)
               .then((res) => {
                 this.setState({
-                  [dude]:
+                  ["contractor" + dude]:
                     res.data.company_name ||
                     `${res.data.first_name} ${res.data.last_name[0]}`,
                 });
@@ -36,58 +36,64 @@ class JobTable extends Component {
         key: "clientNotes",
       },
       {
-        title: "Fixer Details",
-        dataIndex: "contractorNotes",
-        key: "contractorNotes",
-      },
-      {
         title: "Date Requested",
         dataIndex: "dateRequested",
         key: "dateRequested",
         render: (date) => {
-          return Date(date);
-        },
-      },
-      {
-        title: "Active",
-        dataIndex: "active",
-        key: "active",
-        render: (active) => {
-          if (active) {
-            return "Yes";
-          } else {
-            return "No";
-          }
-        },
-      },
-      {
-        title: "Complete",
-        dataIndex: "complete",
-        key: "complete",
-        render: (complete) => {
-          if (complete) {
-            return "Yes";
-          } else {
-            return "No";
-          }
-        },
-      },
-      {
-        title: "Action",
-        dataIndex: "complete",
-        key: "action",
-        render: (tag) => {
-          let color = "green";
-          let text = "Active";
-          if (tag === false) {
-            color = "volcano";
-            text = "Not Active";
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {text}
-            </Tag>
+          let formatDate = new Intl.DateTimeFormat("en-US").format(
+            new Date(date)
           );
+          return formatDate;
+        },
+      },
+      {
+        title: "Status",
+        dataIndex: "status",
+        key: "status",
+        // filters: [
+        //   { text: 'Requested', value: 'requested' },
+        //   { text: 'Accepted', value: 'accepted' },
+        //   { text: 'Declined', value: 'declined' },
+        //   { text: 'Requested', value: 'requested' },
+        // ],
+        render: (tag, record) => {
+          let color = "green";
+          switch (tag) {
+            case "requested":
+              color = "magenta";
+              return (
+                <Tag color={color} key={tag}>
+                  {tag}
+                </Tag>
+              );
+            case "accepted":
+              color = "blue";
+              return (
+                <Tag color={color} key={tag}>
+                  {tag}
+                </Tag>
+              );
+            case "declined":
+              color = "default";
+              return (
+                <Tag color={color} key={tag}>
+                  {tag}
+                </Tag>
+              );
+            case "completed":
+              color = "green";
+              return (
+                <Tag color={color} key={tag}>
+                  {tag}
+                </Tag>
+              );
+            default:
+              return (
+                <Tag color="default" key={tag}>
+                  {tag}
+                </Tag>
+              );
+          }
         },
       },
     ],
@@ -95,14 +101,11 @@ class JobTable extends Component {
 
   render() {
     return (
-      console.log(this.state),
-      (
-        <Table
-          rowKey="id"
-          columns={this.state.columns}
-          dataSource={this.props.jobs}
-        />
-      )
+      <Table
+        rowKey="id"
+        columns={this.state.columns}
+        dataSource={this.props.jobs}
+      />
     );
   }
 }

@@ -1,99 +1,174 @@
-import { Table, Tag } from "antd";
+import { Table, Tag, Modal } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 import React, { Component } from "react";
-//import axios from "axios";
+import axios from "axios";
 
-const columns = [
-  {
-    title: "Job ID",
-    dataIndex: "id",
-    key: "id",
-  },
-  {
-    title: "Client",
-    dataIndex: "clientID",
-    key: "clientID",
-  },
-  {
-    title: "Client Details",
-    dataIndex: "clientNotes",
-    key: "clientNotes",
-  },
-  {
-    title: "Fixer Details",
-    dataIndex: "contractorNotes",
-    key: "contractorNotes",
-  },
-  {
-    title: "Date Requested",
-    dataIndex: "dateRequested",
-    key: "dateRequested",
-    render: (date) => {
-      return Date(date);
+const { confirm } = Modal;
+
+function showRequest(jobID) {
+  confirm({
+    title: "Would you like to accept this Fixer request?",
+    icon: <ExclamationCircleOutlined />,
+    content:
+      "Confirming will change the status of this request to 'Accepted' and the user will be notified.",
+    okText: "Accept",
+    cancelText: "Decline",
+    onOk() {
+      axios
+        .patch(`http://127.0.0.1:8000/jobs/${jobID}/`, {
+          status: "accepted",
+        })
+        .then(() => {
+          window.location.reload();
+        });
     },
-  },
-  {
-    title: "Active",
-    dataIndex: "active",
-    key: "active",
-    render: (active) => {
-      if (active) {
-        return "Yes";
-      } else {
-        return "No";
-      }
+    onCancel() {
+      axios
+        .patch(`http://127.0.0.1:8000/jobs/${jobID}/`, {
+          status: "declined",
+        })
+        .then(() => {
+          window.location.reload();
+        });
     },
-  },
-  {
-    title: "Complete",
-    dataIndex: "complete",
-    key: "complete",
-    render: (complete) => {
-      if (complete) {
-        return "Yes";
-      } else {
-        return "No";
-      }
+  });
+}
+
+function showDecline(jobID) {
+  confirm({
+    title: "Would you like to change your response to Accept this request?",
+    icon: <ExclamationCircleOutlined />,
+    content:
+      "Confirming will change the status of this request to 'Accepted' and the user will be notified.",
+    okText: "Accept",
+    cancelText: "Cancel",
+    onOk() {
+      axios
+        .patch(`http://127.0.0.1:8000/jobs/${jobID}/`, {
+          status: "accepted",
+        })
+        .then(() => {
+          window.location.reload();
+        });
     },
-  },
-  {
-    title: "Action",
-    dataIndex: "complete",
-    key: "action",
-    render: (tag) => {
-      let color = "green";
-      if (tag === false) {
-        color = "volcano";
-      }
-      return (
-        <Tag color={color} key={tag}>
-          Coming Soon!
-        </Tag>
-      );
+    onCancel() {
+      console.log(`Cancel: ${jobID}`);
     },
-  },
-];
+  });
+}
+
+function showAccept(jobID) {
+  confirm({
+    title: "Mark this request as Completed?",
+    icon: <ExclamationCircleOutlined />,
+    content:
+      "Confirming will change the status of this request to 'Completed' and the user will be notified.",
+    okText: "Complete!",
+    cancelText: "Cancel",
+    onOk() {
+      axios
+        .patch(`http://127.0.0.1:8000/jobs/${jobID}/`, {
+          status: "completed",
+        })
+        .then(() => {
+          window.location.reload();
+        });
+    },
+    onCancel() {
+      console.log(`Cancel: ${jobID}`);
+    },
+  });
+}
 
 class ContractorJobTable extends Component {
-  //   formatData(row) {
-  //     axios
-  //       .get(`http://127.0.0.1:8000/contractors/${row.clientID}/RUD`)
-  //       .then((res) => {
-  //         row.clientID = res.data.first_name;
-  //       })
-  //       .catch((err) => {
-  //         console.log("NOPE", err);
-  //       });
-  //     return row;
-  //   }
-
-  //   data(entry) {
-  //     return entry.map((row) => {
-  //       return this.formatData(row);
-  //     });
-  //   }
-
+  state = {
+    columns: [
+      {
+        title: "Job ID",
+        dataIndex: "id",
+        key: "id",
+      },
+      {
+        title: "Client",
+        dataIndex: "clientID",
+        key: "clientID",
+      },
+      {
+        title: "Client Details",
+        dataIndex: "clientNotes",
+        key: "clientNotes",
+      },
+      {
+        title: "Date Requested",
+        dataIndex: "dateRequested",
+        key: "dateRequested",
+        render: (date) => {
+          let formatDate = new Intl.DateTimeFormat("en-US").format(
+            new Date(date)
+          );
+          return formatDate;
+        },
+      },
+      {
+        title: "Status",
+        dataIndex: "status",
+        key: "status",
+        // filters: [
+        //   { text: 'Requested', value: 'requested' },
+        //   { text: 'Accepted', value: 'accepted' },
+        //   { text: 'Declined', value: 'declined' },
+        //   { text: 'Requested', value: 'requested' },
+        // ],
+        render: (tag, record) => {
+          let color = "green";
+          switch (tag) {
+            case "requested":
+              color = "magenta";
+              return (
+                <Tag color={color} key={tag}>
+                  <a onClick={() => showRequest(record.id)}>{tag}</a>
+                </Tag>
+              );
+            case "accepted":
+              color = "blue";
+              return (
+                <Tag color={color} key={tag}>
+                  <a onClick={() => showAccept(record.id)}>{tag}</a>
+                </Tag>
+              );
+            case "declined":
+              color = "default";
+              return (
+                <Tag color={color} key={tag}>
+                  <a onClick={() => showDecline(record.id)}>{tag}</a>
+                </Tag>
+              );
+            case "completed":
+              color = "green";
+              return (
+                <Tag color={color} key={tag}>
+                  {tag}
+                </Tag>
+              );
+            default:
+              return (
+                <Tag color="default" key={tag}>
+                  {tag}
+                </Tag>
+              );
+          }
+        },
+      },
+    ],
+  };
   render() {
-    return <Table rowKey="id" columns={columns} dataSource={this.props.jobs} />;
+    return (
+      <Table
+        rowKey="id"
+        columns={this.state.columns}
+        dataSource={this.props.jobs}
+      />
+    );
   }
 }
 
