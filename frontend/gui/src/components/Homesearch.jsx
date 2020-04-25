@@ -17,7 +17,7 @@ const Homesearch = () => {
           <a href="/search?skill=Electrician">
             <img
               src={ElectricianButton}
-              style={{ maxHeight: "125px" }}
+              style={{ maxHeight: "125px", maxWidth: "100%" }}
               alt="Search Electricians"
             />
           </a>
@@ -26,7 +26,7 @@ const Homesearch = () => {
           <a href="/search?skill=Plumber">
             <img
               src={PlumberButton}
-              style={{ maxHeight: "125px" }}
+              style={{ maxHeight: "125px", maxWidth: "100%" }}
               alt="Search Plumbers"
             />
           </a>
@@ -35,7 +35,7 @@ const Homesearch = () => {
           <a href="/search?skill=Housekeeper">
             <img
               src={HousekeeperButton}
-              style={{ maxHeight: "125px" }}
+              style={{ maxHeight: "125px", maxWidth: "100%" }}
               alt="Search Housekeepers"
             />
           </a>
@@ -44,7 +44,7 @@ const Homesearch = () => {
           <a href="/search?skill=Landscaper">
             <img
               src={LandscaperButton}
-              style={{ maxHeight: "125px" }}
+              style={{ maxHeight: "125px", maxWidth: "100%" }}
               alt="Search Landscapers"
             />
           </a>
@@ -53,7 +53,7 @@ const Homesearch = () => {
           <a href="/search?skill=General">
             <img
               src={GeneralButton}
-              style={{ maxHeight: "125px" }}
+              style={{ maxHeight: "125px", maxWidth: "100%" }}
               alt="Search General"
             />
           </a>
@@ -62,7 +62,7 @@ const Homesearch = () => {
           <a href="/search?skill=Builder">
             <img
               src={BuilderButton}
-              style={{ maxHeight: "125px" }}
+              style={{ maxHeight: "125px", maxWidth: "100%" }}
               alt="Search Builders"
             />
           </a>

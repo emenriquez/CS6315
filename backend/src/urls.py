@@ -17,11 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from userAccount.views import RegisterView
 
+from rest_framework.routers import DefaultRouter
+from job.views import JobViewSet
+
+#Configure JobViewSet
+router = DefaultRouter()
+router.register(r'jobs', JobViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('contractor.api.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('rest-auth/', include('rest_auth.urls')),
-    path('rest-auth/registration/', RegisterView.as_view())
-#    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('rest-auth/registration/', RegisterView.as_view()),
+    path('', include(router.urls)),
 ]

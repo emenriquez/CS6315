@@ -19,7 +19,7 @@ class LeftMenu extends Component {
               </a>
             </Menu.Item>
             <Menu.Item key="contractor">
-              <a href="/fixer">Become a Fixer!</a>
+              <a href="/fixer">My Fixer Profile</a>
             </Menu.Item>
           </Menu>
         ) : (
@@ -35,7 +35,7 @@ class LeftMenu extends Component {
               </a>
             </Menu.Item>
             <Menu.Item key="contractor">
-              <a href="/login">Become a Fixer!</a>
+              <a href="/login">My Fixer Profile</a>
             </Menu.Item>
           </Menu>
         )}

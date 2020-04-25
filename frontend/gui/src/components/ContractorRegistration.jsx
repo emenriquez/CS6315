@@ -12,6 +12,8 @@ import {
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import axios from "axios";
+import * as actions from "../store/actions/auth";
+import ContractorJobTable from "../components/ContractorJobTable";
 
 const layout = {
   labelCol: { span: 8 },
@@ -28,6 +30,7 @@ class ContractorRegistration extends Component {
     ready: true,
     user: [],
     contractor: { skill: [], city: [] },
+    jobs: [],
   };
 
   componentDidUpdate() {
@@ -52,11 +55,26 @@ class ContractorRegistration extends Component {
               .catch((error) => {
                 this.setState({ ready: false });
               });
+            axios
+              .get(
+                `http://127.0.0.1:8000/jobs/?contractorID=${this.state.user.id}`
+              )
+              .then((res) => {
+                this.setState({ jobs: res.data });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           });
       } else {
         console.log("user not loaded");
       }
     }
+  }
+
+  constructor(props) {
+    super(props);
+    this.props.getUserID();
   }
 
   render() {
@@ -115,7 +133,6 @@ class ContractorRegistration extends Component {
     };
 
     const onUpdate = (values) => {
-      console.log("Whoa!:", values);
       updateContractor(values, this.state.user);
       window.location.href = "/fixer";
     };
@@ -153,6 +170,9 @@ class ContractorRegistration extends Component {
                 *Available Now!*
               </Descriptions.Item>
             </Descriptions>
+            <Divider />
+            <h3>My Jobs</h3>
+            <ContractorJobTable jobs={this.state.jobs} />
             <Divider />
             <h3 style={{ margin: "auto", padding: "30px" }}>
               Update Your Contractor Profile
@@ -202,6 +222,9 @@ class ContractorRegistration extends Component {
                   <Option value="Electrician">Electrician</Option>
                   <Option value="Plumber">Plumber</Option>
                   <Option value="Housekeeper">Housekeeper</Option>
+                  <Option value="Landscaper">Landscaper</Option>
+                  <Option value="General">General / Misc.</Option>
+                  <Option value="Builder">Builder</Option>
                 </Select>
               </Form.Item>
 
@@ -350,4 +373,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ContractorRegistration);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUserID: () => dispatch(actions.getUserID()),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContractorRegistration);

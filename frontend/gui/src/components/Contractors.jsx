@@ -6,8 +6,13 @@ import { StarOutlined } from "@ant-design/icons";
 const IconText = ({ icon, text }) => (
   <span>
     <Popover
-      title="Email"
-      content="Contractor Email Here (Coming Soon!)"
+      title="Reviews"
+      content={
+        <div>
+          <p>This Fixer doesn't have reviews yet</p>
+          <p>(Coming Soon!)</p>
+        </div>
+      }
       trigger="click"
     >
       {React.createElement(icon, { style: { marginRight: 8 } })}
@@ -51,14 +56,14 @@ const Contractors = (props) => {
               props.token ? (
                 <IconText
                   icon={StarOutlined}
-                  text="Request Me"
+                  text="Reviews"
                   key="list-vertical-star-o"
                   href="/"
                 />
               ) : (
                 <IconLogin
                   icon={StarOutlined}
-                  text="Request Me"
+                  text="Reviews"
                   key="list-vertical-star-o"
                   href="/"
                 />

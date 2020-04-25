@@ -22,8 +22,10 @@ export const authFail = (error) => {
 };
 
 export const logout = () => {
-  localStorage.removeItem("user");
+  localStorage.removeItem("username");
+  localStorage.removeItem("userID");
   localStorage.removeItem("expirationDate");
+  localStorage.removeItem("token");
   return {
     type: actionTypes.AUTH_LOGOUT,
   };
@@ -52,6 +54,7 @@ export const authLogin = (email, password) => {
         localStorage.setItem("expirationDate", expirationDate);
         dispatch(authSuccess(token));
         dispatch(checkAuthTimeout(3600));
+        dispatch(getUserID());
       })
       .catch((err) => {
         dispatch(authFail(err));
@@ -99,6 +102,7 @@ export const authCheckState = () => {
     const token = localStorage.getItem("token");
     if (token === undefined) {
       dispatch(logout());
+      window.location.href = "/";
     } else {
       const expirationDate = new Date(localStorage.getItem("expirationDate"));
       if (expirationDate <= new Date()) {
@@ -112,5 +116,33 @@ export const authCheckState = () => {
         );
       }
     }
+  };
+};
+
+// Job related functions
+export const getUserID = () => {
+  return (dispatch) => {
+    const token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    };
+    axios
+      .get(`http://127.0.0.1:8000/rest-auth/user/`, options)
+      .then((res) => {
+        dispatch(idSuccess(res.data.id, res.data.username));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const idSuccess = (userID, username) => {
+  return {
+    type: actionTypes.ID_SUCCESS,
+    userID: userID,
+    username: username,
   };
 };
