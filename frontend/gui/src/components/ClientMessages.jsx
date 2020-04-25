@@ -58,7 +58,7 @@ class ClientMessages extends Component {
   render() {
     return (
       <div>
-        <a href="javascript:history.back()">
+        <a href="/account">
           <ArrowLeftOutlined /> Go Back
         </a>
         <Divider orientation="left">Messages for Job</Divider>

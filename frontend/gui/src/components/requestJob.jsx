@@ -41,7 +41,7 @@ class RequestJob extends Component {
           })
           .then(() => {
             console.log("Yeah!!");
-            window.location.reload();
+            window.location.href = "/confirm";
           });
       });
     this.setState({

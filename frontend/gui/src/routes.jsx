@@ -10,6 +10,7 @@ import MyAccount from "./containers/MyAccount";
 import ContractorRegistration from "./components/ContractorRegistration";
 import ClientMessages from "./components/ClientMessages";
 import ContractorMessages from "./components/ContractorMessages";
+import ConfirmRequest from "./components/ConfirmRequest";
 
 const BaseRouter = () => (
   <div>
@@ -26,6 +27,7 @@ const BaseRouter = () => (
     <Route exact path="/fixer" component={ContractorRegistration} />
     <Route exact path="/messages" component={ClientMessages} />
     <Route exact path="/fixermessages" component={ContractorMessages} />
+    <Route exact path="/confirm" component={ConfirmRequest} />
   </div>
 );
 

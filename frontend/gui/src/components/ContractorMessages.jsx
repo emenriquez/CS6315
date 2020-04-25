@@ -58,7 +58,7 @@ class ContractorMessages extends Component {
   render() {
     return (
       <div>
-        <a href="javascript:history.back()">
+        <a href="/fixer">
           <ArrowLeftOutlined /> Go Back
         </a>
         <Divider orientation="left">Messages for Job</Divider>
