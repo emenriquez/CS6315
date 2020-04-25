@@ -83,6 +83,7 @@ class ContractorRegistration extends Component {
         statevals.id,
         statevals.first_name,
         statevals.last_name,
+        statevals.email,
         values.companyName,
         values.skills,
         values.cities
@@ -92,6 +93,7 @@ class ContractorRegistration extends Component {
           id: statevals.id,
           first_name: statevals.first_name,
           last_name: statevals.last_name,
+          email: statevals.email,
           company_name: values.companyName,
           skill: values.skills,
           city: values.cities,
@@ -317,6 +319,9 @@ class ContractorRegistration extends Component {
                   <Option value="Electrician">Electrician</Option>
                   <Option value="Plumber">Plumber</Option>
                   <Option value="Housekeeper">Housekeeper</Option>
+                  <Option value="Landscaper">Landscaper</Option>
+                  <Option value="General">General / Misc.</Option>
+                  <Option value="Builder">Builder</Option>
                 </Select>
               </Form.Item>
 

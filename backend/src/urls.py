@@ -19,10 +19,13 @@ from userAccount.views import RegisterView
 
 from rest_framework.routers import DefaultRouter
 from job.views import JobViewSet
+from message.views import ClientMessageViewSet, ContractorMessageViewSet
 
 #Configure JobViewSet
 router = DefaultRouter()
 router.register(r'jobs', JobViewSet)
+router.register(r'clientmsg', ClientMessageViewSet, basename='clientmsg')
+router.register(r'contractormsg', ContractorMessageViewSet, basename='contractormsg')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

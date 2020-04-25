@@ -1,4 +1,4 @@
-import { Table, Tag, Modal } from "antd";
+import { Table, Tag, Modal, Button } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import React, { Component } from "react";
 import axios from "axios";
@@ -126,21 +126,27 @@ class ContractorJobTable extends Component {
               color = "magenta";
               return (
                 <Tag color={color} key={tag}>
-                  <a onClick={() => showRequest(record.id)}>{tag}</a>
+                  <a href="#!" onClick={() => showRequest(record.id)}>
+                    {tag}
+                  </a>
                 </Tag>
               );
             case "accepted":
               color = "blue";
               return (
                 <Tag color={color} key={tag}>
-                  <a onClick={() => showAccept(record.id)}>{tag}</a>
+                  <a href="#!" onClick={() => showAccept(record.id)}>
+                    {tag}
+                  </a>
                 </Tag>
               );
             case "declined":
               color = "default";
               return (
                 <Tag color={color} key={tag}>
-                  <a onClick={() => showDecline(record.id)}>{tag}</a>
+                  <a href="#!" onClick={() => showDecline(record.id)}>
+                    {tag}
+                  </a>
                 </Tag>
               );
             case "completed":
@@ -157,6 +163,24 @@ class ContractorJobTable extends Component {
                 </Tag>
               );
           }
+        },
+      },
+      {
+        title: "Message",
+        dataIndex: "id",
+        key: "message",
+        render: (jobID) => {
+          return (
+            <Button
+              type="primary"
+              size="small"
+              onClick={() =>
+                (window.location.href = `/fixermessages/?jobID=${jobID}`)
+              }
+            >
+              Messages
+            </Button>
+          );
         },
       },
     ],

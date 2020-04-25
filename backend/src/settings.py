@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'contractor',
     'userAccount',
     'job',
+    'message',
 ]
 
 SITE_ID = 1

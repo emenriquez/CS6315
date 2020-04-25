@@ -6,6 +6,7 @@ from rest_framework.permissions import AllowAny
 
 class Contractor(models.Model):
     id = models.OneToOneField('userAccount.Account', on_delete=models.DO_NOTHING, primary_key=True)
+    email = models.OneToOneField('userAccount.Account', on_delete=models.DO_NOTHING, to_field='email', related_name='contact')
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     company_name = models.CharField(max_length=50, default=None, null=True)
